@@ -1,12 +1,11 @@
 import { Tabs } from 'expo-router';
-import { Text } from 'react-native';
 
 export default function TabsLayout() {
   return (
     <Tabs>
-      {/* Add an index screen */}
+      {/* Login Screen */}
       <Tabs.Screen
-        name="index"
+        name="index" // Keep this as the Login screen
         options={{
           title: 'Login',
           tabBarLabel: 'Login',
@@ -19,15 +18,6 @@ export default function TabsLayout() {
         options={{
           title: 'Dashboard',
           tabBarLabel: 'Dashboard',
-        }}
-      />
-
-      {/* Login Screen */}
-      <Tabs.Screen
-        name="login"
-        options={{
-          title: 'Login',
-          tabBarLabel: 'Login',
         }}
       />
     </Tabs>
