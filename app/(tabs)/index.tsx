@@ -1,68 +1,130 @@
-import React from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import React from 'react';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 
-const LoginScreen = () => {
+export default function Login() {
   return (
-    <View className="flex-1 bg-white items-center justify-center px-4">
-      {/* Logo Placeholder */}
-      <View className="bg-gray-200 rounded-full h-20 w-20 mb-6 items-center justify-center">
-        <Text className="text-2xl font-bold">Logo</Text>
-      </View>
-
-      {/* Welcome Text */}
-      <Text className="text-lg font-semibold text-gray-600">WELCOME TO</Text>
-      <Text className="text-3xl font-bold text-pink-600">POCKETPLAN</Text>
-
-      {/* Email Input */}
-      <TextInput
-        placeholder="Email"
-        placeholderTextColor="gray"
-        className="w-full bg-gray-100 p-4 rounded-lg mt-6 text-gray-800"
-      />
-
-      {/* Password Input */}
-      <TextInput
-        placeholder="Password"
-        placeholderTextColor="gray"
-        secureTextEntry
-        className="w-full bg-gray-100 p-4 rounded-lg mt-4 text-gray-800"
-      />
-
-      {/* Forgot Password Link */}
-      <TouchableOpacity className="self-end mt-2">
-        <Text className="text-pink-500 text-sm">Forgot password? Click here</Text>
-      </TouchableOpacity>
-
-      {/* Login Button */}
-      <TouchableOpacity className="w-full bg-pink-500 py-4 rounded-lg mt-6 items-center">
-        <Text className="text-white text-lg font-semibold">Log In</Text>
-      </TouchableOpacity>
-
-      {/* Divider */}
-      <View className="flex-row items-center my-6">
-        <View className="flex-1 h-[1px] bg-gray-300" />
-        <Text className="mx-4 text-gray-500">or</Text>
-        <View className="flex-1 h-[1px] bg-gray-300" />
-      </View>
-
-      {/* Social Media Buttons Placeholder */}
-      <View className="flex-row space-x-4">
-        <View className="bg-gray-100 p-4 rounded-full">
-          <Text className="text-gray-400">FB</Text>
+    <View style={styles.outerContainer}>
+      <View style={styles.innerContainer}>
+        <View style={styles.logoContainer}>
+          <View style={styles.logoCircle}>
+            <Text style={styles.logo}>👜</Text> {/* Placeholder for the wallet icon */}
+          </View>
         </View>
-        <View className="bg-gray-100 p-4 rounded-full">
-          <Text className="text-gray-400">G</Text>
+        <Text style={styles.title}>WELCOME TO POCKETPLAN</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor="#AAA"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="#AAA"
+          secureTextEntry
+        />
+        <TouchableOpacity>
+          <Text style={styles.forgotPassword}>Forgot password? Click here</Text>
+        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+          <Button title="Log In" onPress={() => {}} color="#FFFFFF" />
         </View>
+        <Text style={styles.orText}>or</Text>
+        <View style={styles.socialContainer}>
+          <TouchableOpacity style={styles.socialButton}>
+            <Text style={styles.socialText}>f</Text> {/* Placeholder for Facebook icon */}
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.socialButton}>
+            <Text style={styles.socialText}>G</Text> {/* Placeholder for Google icon */}
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity>
+          <Text style={styles.signUp}>Don't have an account? Click here</Text>
+        </TouchableOpacity>
       </View>
-
-      {/* Sign Up Link */}
-      <TouchableOpacity className="mt-6">
-        <Text className="text-gray-500 text-sm">
-          Don’t have an account? <Text className="text-pink-500">Click here</Text>
-        </Text>
-      </TouchableOpacity>
     </View>
   );
-};
+}
 
-export default LoginScreen;
+const styles = StyleSheet.create({
+  outerContainer: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  innerContainer: {
+    backgroundColor: '#FF69B4',
+    padding: 20,
+    borderRadius: 10,
+    width: '100%',
+    alignItems: 'center',
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  logoCircle: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 50,
+    padding: 10,
+  },
+  logo: {
+    fontSize: 24,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#CCCCCC',
+    padding: 12,
+    marginBottom: 16,
+    borderRadius: 8,
+    backgroundColor: '#FFFFFF',
+    width: '100%',
+  },
+  forgotPassword: {
+    color: '#FFFFFF',
+    textAlign: 'right',
+    marginBottom: 20,
+  },
+  buttonContainer: {
+    borderRadius: 8,
+    overflow: 'hidden',
+    backgroundColor: '#6200ee',
+    marginBottom: 20,
+    width: '100%',
+  },
+  orText: {
+    textAlign: 'center',
+    color: '#FFFFFF',
+    marginBottom: 10,
+  },
+  socialContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+    width: '100%',
+  },
+  socialButton: {
+    backgroundColor: '#FFFFFF',
+    padding: 10,
+    borderRadius: 50,
+    width: '45%',
+    alignItems: 'center',
+  },
+  socialText: {
+    color: '#FF69B4',
+    fontSize: 18,
+  },
+  signUp: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+    marginTop: 10,
+  },
+});
