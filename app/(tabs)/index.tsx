@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 export default function Login() {
   return (
@@ -7,7 +7,7 @@ export default function Login() {
       <View style={styles.innerContainer}>
         <View style={styles.logoContainer}>
           <View style={styles.logoCircle}>
-            <Text style={styles.logo}>👜</Text> {/* Placeholder for the wallet icon */}
+            <Image source={require('../../assets/images/wallet.png')} style={styles.logo} /> {/* Placeholder for the wallet icon */}
           </View>
         </View>
         <Text style={styles.title}>WELCOME TO POCKETPLAN</Text>
@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   logo: {
-    fontSize: 24,
+    width: 50, // adjust the width as needed
+    height: 50, // adjust the height as needed
   },
   title: {
     fontSize: 18,
