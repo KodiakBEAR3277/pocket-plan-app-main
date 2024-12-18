@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { Link } from 'expo-router'; // Import Link from expo-router
 
 export default function Login() {
   return (
@@ -7,10 +8,21 @@ export default function Login() {
       <View style={styles.innerContainer}>
         <View style={styles.logoContainer}>
           <View style={styles.logoCircle}>
-            <Image source={require('../../assets/images/wallet.png')} style={styles.logo} /> {/* Placeholder for the wallet icon */}
+            <Image
+              source={require('../../assets/images/wallet.png')}
+              style={styles.logo}
+            />
           </View>
         </View>
-        <Text style={styles.title}>WELCOME TO POCKETPLAN</Text>
+
+        {/* Layered Title */}
+        <View style={styles.titleContainer}>
+          <Text style={styles.welcomeText}>WELCOME TO</Text>
+          <Text style={styles.pocketText}>
+            POCKET<Text style={styles.planText}>PLAN</Text>
+          </Text>
+        </View>
+
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -25,16 +37,36 @@ export default function Login() {
         <TouchableOpacity>
           <Text style={styles.forgotPassword}>Forgot password? Click here</Text>
         </TouchableOpacity>
-        <View style={styles.buttonContainer}>
-          <Button title="Log In" onPress={() => {}} color="#FFFFFF" />
+
+        {/* Login Button with Link */}
+        <View style={styles.buttonWrapper}>
+          <Link href="/(tabs)/dashboard" asChild>
+            <TouchableOpacity style={styles.loginButton}>
+              <Text style={styles.loginText}>Log In</Text>
+            </TouchableOpacity>
+          </Link>
         </View>
-        <Text style={styles.orText}>or</Text>
+
+        {/* Lines with OR */}
+        <View style={styles.orContainer}>
+          <View style={styles.line} />
+          <Text style={styles.orText}>or</Text>
+          <View style={styles.line} />
+        </View>
+
+        {/* Social Media Buttons */}
         <View style={styles.socialContainer}>
           <TouchableOpacity style={styles.socialButton}>
-            <Text style={styles.socialText}>f</Text> {/* Placeholder for Facebook icon */}
+            <Image
+              source={require('../../assets/images/facebook.png')}
+              style={styles.socialIcon}
+            />
           </TouchableOpacity>
           <TouchableOpacity style={styles.socialButton}>
-            <Text style={styles.socialText}>G</Text> {/* Placeholder for Google icon */}
+            <Image
+              source={require('../../assets/images/google.png')}
+              style={styles.socialIcon}
+            />
           </TouchableOpacity>
         </View>
         <TouchableOpacity>
@@ -48,37 +80,55 @@ export default function Login() {
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F4F4F4',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
   },
   innerContainer: {
-    backgroundColor: '#FF69B4',
+    backgroundColor: '#FC1B60',
     padding: 20,
     borderRadius: 10,
     width: '100%',
     alignItems: 'center',
+    position: 'relative',
   },
   logoContainer: {
+    position: 'absolute',
+    top: -60,
+    alignItems: 'center',
+    width: '100%',
+  },
+  logoCircle: {
+    backgroundColor: '#EBEBEB',
+    borderRadius: 90,
+    width: 125,
+    height: 125,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 60,
+    height: 60,
+  },
+  titleContainer: {
+    marginTop: 60,
     alignItems: 'center',
     marginBottom: 20,
   },
-  logoCircle: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 50,
-    padding: 10,
+  welcomeText: {
+    fontSize: 14,
+    color: '#FFFFFF',
+    fontWeight: '400',
+    marginBottom: 3,
   },
-  logo: {
-    width: 50, // adjust the width as needed
-    height: 50, // adjust the height as needed
-  },
-  title: {
-    fontSize: 18,
+  pocketText: {
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#FFFFFF',
-    marginBottom: 20,
-    textAlign: 'center',
+  },
+  planText: {
+    color: '#424242',
   },
   input: {
     borderWidth: 1,
@@ -93,35 +143,59 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     textAlign: 'right',
     marginBottom: 20,
+    alignSelf: 'flex-end',
   },
-  buttonContainer: {
-    borderRadius: 8,
-    overflow: 'hidden',
-    backgroundColor: '#6200ee',
+  buttonWrapper: {
+    alignSelf: 'flex-start',
     marginBottom: 20,
+  },
+  loginButton: {
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  loginText: {
+    color: '#FC1B60',
+    fontWeight: 'bold',
+  },
+  orContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 20,
     width: '100%',
   },
+  line: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 10,
+  },
   orText: {
-    textAlign: 'center',
     color: '#FFFFFF',
-    marginBottom: 10,
+    fontSize: 14,
+    fontWeight: 'bold',
   },
   socialContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 20,
     width: '100%',
   },
   socialButton: {
     backgroundColor: '#FFFFFF',
-    padding: 10,
+    padding: 15,
     borderRadius: 50,
-    width: '45%',
     alignItems: 'center',
+    width: 60,
+    height: 60,
+    justifyContent: 'center',
+    marginHorizontal: 10,
   },
-  socialText: {
-    color: '#FF69B4',
-    fontSize: 18,
+  socialIcon: {
+    width: 30,
+    height: 30,
   },
   signUp: {
     color: '#FFFFFF',
