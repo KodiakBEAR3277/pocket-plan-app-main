@@ -1,90 +1,190 @@
 import React from 'react';
-import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, Image, ScrollView, StyleSheet, SafeAreaView } from 'react-native';
 
-export default function App() {
+export default function Dashboard() {
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Welcome to the Expo</Text>
-        <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.profilePic} />
-        <Text style={styles.notification}>🔔</Text>
-      </View>
-
-      <View style={styles.budget}>
-        <Text style={styles.sectionTitle}>Budget Overview</Text>
-        <Text>Summary of Expenses: $10,000</Text>
-      </View>
-
-      <View style={styles.details}>
-        <Text style={styles.sectionTitle}>Additional Information</Text>
-        <Text>Category 1: Description, Value</Text>
-        <Text>Category 2: Description, Value</Text>
-        <Text>Category 3: Description, Value</Text>
-      </View>
-
-      <View style={styles.carousel}>
-        <Text style={styles.sectionTitle}>Carousel UI Placeholder</Text>
-        {/* Your carousel component code will go here */}
-      </View>
-
-      <View style={styles.nav}>
-        <Text style={styles.navItem}>Home</Text>
-        <Text style={styles.navItem}>Profile</Text>
-        <Text style={styles.navItem}>Settings</Text>
-      </View>
-    </ScrollView>
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.headerLeft}>
+            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.profilePic} />
+            <Text style={styles.title}>Welcome back,{'\n'}Arjay Aranas</Text>
+          </View>
+          <View style={styles.headerRight}>
+            <Text style={styles.notification}>🔔</Text>
+          </View>
+        </View>
+        <View style={styles.innerContainer}>
+          <View style={styles.balance}>
+            <Text style={styles.balanceTitle}>Balance remaining</Text>
+            <View style={styles.balanceContainer}>
+              <Text style={styles.balanceAmount}>₱402</Text>
+            </View>
+          </View>
+          <View style={styles.records}>
+            <View style={styles.recordsItem}>
+              <View style={styles.recordsValue}>
+                <View style={[styles.recordsIcon, { backgroundColor: '#1BFCB8' }]}>
+                  <Text style={styles.recordsIconText}>↙</Text>
+                </View>
+                <View style={styles.recordsTextContainer}>
+                  <Text style={styles.recordsTitle}>Income</Text>
+                  <Text style={styles.recordsAmount}>₱500</Text>
+                </View>
+              </View>
+            </View>
+            
+            <View style={styles.recordsItem}>
+              <View style={styles.recordsValue}>
+                <View style={[styles.recordsIcon, { backgroundColor: '#FC1B60' }]}>
+                  <Text style={styles.recordsIconText}>↗</Text>
+                </View>
+                <View style={styles.recordsTextContainer}>
+                  <Text style={styles.recordsTitle}>Expenses</Text>
+                  <Text style={styles.recordsAmount}>₱98</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View style={styles.innerContainer}>
+          <View style={styles.details}>
+            <View style={styles.detailsItem}>
+              <Text style={styles.detailsTitle}>Transportation</Text>
+              <Text style={styles.detailsValue}>₱70</Text>
+            </View>
+            <View style={styles.detailsItem}>
+              <Text style={styles.detailsTitle}>Allowance</Text>
+              <Text style={styles.detailsValue}>+₱500</Text>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#F4F4F4',
+  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F4F4F4',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 10,
-    backgroundColor: '#f4f4f4',
+    padding: 16,
+    marginTop: 16, // Add this line
+    backgroundColor: '#F4F4F4',
   },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   profilePic: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 12,
   },
-  notification: {
-    fontSize: 18,
-  },
-  budget: {
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  details: {
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  carousel: {
-    padding: 20,
-  },
-  sectionTitle: {
+  title: {
+    color: 'black',  // Changed from white since background is now light
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 10,
   },
-  nav: {
+  headerRight: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: 10,
-    backgroundColor: '#f4f4f4',
+    alignItems: 'center',
   },
-  navItem: {
-    padding: 10,
+  notification: {
+    fontSize: 24,
+    color: 'black',  // Changed from white since background is now light
+  },
+  innerContainer: {
+    backgroundColor: '#EBEBEB',  // Changed from white
+    padding: 16,
+    borderRadius: 8,
+    marginHorizontal: 16,
+    marginTop: 16,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 8,  // Increased for Android
+  },
+  balance: {
+    marginBottom: 16,
+  },
+  balanceTitle: {
+    fontSize: 14,
+    color: '#666',
+  },
+  balanceContainer: {
+    marginTop: 4,
+  },
+  balanceAmount: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  records: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 16,
+  },
+  recordsItem: {
+    flex: 1,
+  },
+  recordsValue: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  recordsIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  recordsIconText: {
+    fontSize: 24,
+    color: 'white',
+    lineHeight: 28,
+    textAlign: 'center',
+  },
+  recordsTextContainer: {
+    flex: 1,
+  },
+  recordsTitle: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 4,
+  },
+  recordsAmount: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  details: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  detailsItem: {
+    flex: 1,
+    marginHorizontal: 8,
+  },
+  detailsTitle: {
+    fontSize: 14,
+    color: '#666',
+  },
+  detailsValue: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
   },
 });
