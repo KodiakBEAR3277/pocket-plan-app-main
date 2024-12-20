@@ -1,7 +1,11 @@
-import React from 'react';
+import Carousel from '@/components/Carousel';
+import BottomNavigation from '@/components/NavigationBar';
+import React, { useState } from 'react';
 import { View, Text, Image, ScrollView, StyleSheet, SafeAreaView } from 'react-native';
 
 export default function Dashboard() {
+  const [currentTab, setCurrentTab] = useState('home');
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.container}>
@@ -47,19 +51,13 @@ export default function Dashboard() {
             </View>
           </View>
         </View>
-        <View style={styles.innerContainer}>
-          <View style={styles.details}>
-            <View style={styles.detailsItem}>
-              <Text style={styles.detailsTitle}>Transportation</Text>
-              <Text style={styles.detailsValue}>₱70</Text>
-            </View>
-            <View style={styles.detailsItem}>
-              <Text style={styles.detailsTitle}>Allowance</Text>
-              <Text style={styles.detailsValue}>+₱500</Text>
-            </View>
-          </View>
-        </View>
+        <Carousel />
+        <View style={styles.bottomPadding} />
       </ScrollView>
+      <BottomNavigation 
+        currentTab={currentTab}
+        onTabPress={setCurrentTab}
+      />
     </SafeAreaView>
   );
 }
@@ -68,6 +66,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: '#F4F4F4',
+    position: 'relative', // Add this to ensure the bottom navigation stays at the bottom
   },
   container: {
     flex: 1,
@@ -78,7 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 16,
-    marginTop: 16, // Add this line
+    marginTop: 16,
     backgroundColor: '#F4F4F4',
   },
   headerLeft: {
@@ -92,7 +91,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   title: {
-    color: 'black',  // Changed from white since background is now light
+    color: 'black',
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -102,10 +101,10 @@ const styles = StyleSheet.create({
   },
   notification: {
     fontSize: 24,
-    color: 'black',  // Changed from white since background is now light
+    color: 'black',
   },
   innerContainer: {
-    backgroundColor: '#EBEBEB',  // Changed from white
+    backgroundColor: '#EBEBEB',
     padding: 16,
     borderRadius: 8,
     marginHorizontal: 16,
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 8,
-    elevation: 8,  // Increased for Android
+    elevation: 8,
   },
   balance: {
     marginBottom: 16,
@@ -170,21 +169,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
   },
-  details: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  detailsItem: {
-    flex: 1,
-    marginHorizontal: 8,
-  },
-  detailsTitle: {
-    fontSize: 14,
-    color: '#666',
-  },
-  detailsValue: {
+  sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
+    marginBottom: 4,
+    marginLeft: 16,
+    marginTop: 24,
+  },
+  sectionSubtitle: {
+    fontSize: 12,
+    color: '#666',
+    marginBottom: 16,
+    marginLeft: 16,
+  },
+  bottomPadding: {
+    height: 80, // Add padding at the bottom to prevent content from being hidden behind the navigation bar
   },
 });
