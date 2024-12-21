@@ -1,5 +1,7 @@
+// components/NavigationBar.tsx
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { HomeIcon, RecordsIcon, AddIcon, GoalsIcon, AccountIcon } from './ui/icons';
 
 const { width } = Dimensions.get('window');
 
@@ -8,45 +10,49 @@ interface NavigationProps {
   onTabPress?: (tab: string) => void;
 }
 
-const BottomNavigation: React.FC<NavigationProps> = ({ 
+const NavigationBar: React.FC<NavigationProps> = ({ 
   currentTab = 'home',
   onTabPress = () => {} 
 }) => {
+  const getIconColor = (tabName: string) => {
+    return currentTab === tabName ? '#FC1B60' : '#666666';
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity 
         style={styles.tab} 
         onPress={() => onTabPress('home')}
       >
-        <Text style={[styles.tabIcon, currentTab === 'home' && styles.activeTab]}>🏠</Text>
+        <HomeIcon color={getIconColor('home')} size={24} />
       </TouchableOpacity>
       
       <TouchableOpacity 
         style={styles.tab} 
-        onPress={() => onTabPress('list')}
+        onPress={() => onTabPress('records')}
       >
-        <Text style={[styles.tabIcon, currentTab === 'list' && styles.activeTab]}>≡</Text>
+        <RecordsIcon color={getIconColor('records')} size={24} />
       </TouchableOpacity>
       
       <TouchableOpacity 
         style={styles.addButton} 
         onPress={() => onTabPress('add')}
       >
-        <Text style={styles.addButtonText}>+</Text>
+        <AddIcon size={24} />
       </TouchableOpacity>
       
       <TouchableOpacity 
         style={styles.tab} 
-        onPress={() => onTabPress('target')}
+        onPress={() => onTabPress('goals')}
       >
-        <Text style={[styles.tabIcon, currentTab === 'target' && styles.activeTab]}>🎯</Text>
+        <GoalsIcon color={getIconColor('goals')} size={24} />
       </TouchableOpacity>
       
       <TouchableOpacity 
         style={styles.tab} 
         onPress={() => onTabPress('profile')}
       >
-        <Text style={[styles.tabIcon, currentTab === 'profile' && styles.activeTab]}>👤</Text>
+        <AccountIcon color={getIconColor('profile')} size={24} />
       </TouchableOpacity>
     </View>
   );
@@ -79,13 +85,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 8,
   },
-  tabIcon: {
-    fontSize: 24,
-    color: '#666',
-  },
-  activeTab: {
-    color: '#FC1B60',
-  },
   addButton: {
     width: 48,
     height: 48,
@@ -95,11 +94,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 16,
   },
-  addButtonText: {
-    fontSize: 28,
-    color: '#333',
-    lineHeight: 32,
-  },
 });
 
-export default BottomNavigation;
+export default NavigationBar;

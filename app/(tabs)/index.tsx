@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { Link } from 'expo-router'; // Import Link from expo-router
+import { Link } from 'expo-router';
 
 export default function Login() {
   return (
@@ -15,7 +15,6 @@ export default function Login() {
           </View>
         </View>
 
-        {/* Layered Title */}
         <View style={styles.titleContainer}>
           <Text style={styles.welcomeText}>WELCOME TO</Text>
           <Text style={styles.pocketText}>
@@ -23,55 +22,62 @@ export default function Login() {
           </Text>
         </View>
 
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          placeholderTextColor="#AAA"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          placeholderTextColor="#AAA"
-          secureTextEntry
-        />
-        <TouchableOpacity>
-          <Text style={styles.forgotPassword}>Forgot password? Click here</Text>
-        </TouchableOpacity>
-
-        {/* Login Button with Link */}
-        <View style={styles.buttonWrapper}>
-          <Link href="/(tabs)/dashboard" asChild>
-            <TouchableOpacity style={styles.loginButton}>
-              <Text style={styles.loginText}>Log In</Text>
+        <View style={styles.formContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            placeholderTextColor="#AAA"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            placeholderTextColor="#AAA"
+            secureTextEntry
+          />
+          
+          <View style={styles.forgotPasswordContainer}>
+            <Text style={styles.forgotPasswordText}>Forgot password? </Text>
+            <TouchableOpacity>
+              <Text style={styles.clickHereText}>Click here</Text>
             </TouchableOpacity>
-          </Link>
-        </View>
+          </View>
 
-        {/* Lines with OR */}
-        <View style={styles.orContainer}>
-          <View style={styles.line} />
-          <Text style={styles.orText}>or</Text>
-          <View style={styles.line} />
-        </View>
+          <View style={styles.buttonWrapper}>
+            <Link href="/(tabs)/dashboard" asChild>
+              <TouchableOpacity style={styles.loginButton}>
+                <Text style={styles.loginText}>Log In</Text>
+              </TouchableOpacity>
+            </Link>
+          </View>
 
-        {/* Social Media Buttons */}
-        <View style={styles.socialContainer}>
-          <TouchableOpacity style={styles.socialButton}>
-            <Image
-              source={require('../../assets/images/facebook.png')}
-              style={styles.socialIcon}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.socialButton}>
-            <Image
-              source={require('../../assets/images/google.png')}
-              style={styles.socialIcon}
-            />
-          </TouchableOpacity>
+          <View style={styles.orContainer}>
+            <View style={styles.line} />
+            <Text style={styles.orText}>or</Text>
+            <View style={styles.line} />
+          </View>
+
+          <View style={styles.socialContainer}>
+            <TouchableOpacity style={styles.socialButton}>
+              <Image
+                source={require('../../assets/images/facebook.png')}
+                style={styles.socialIcon}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.socialButton}>
+              <Image
+                source={require('../../assets/images/google.png')}
+                style={styles.socialIcon}
+              />
+            </TouchableOpacity>
+          </View>
+          
+          <View style={styles.signUpContainer}>
+            <Text style={styles.signUpText}>Don't have an account? </Text>
+            <TouchableOpacity>
+              <Text style={styles.clickHereText}>Click here</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <TouchableOpacity>
-          <Text style={styles.signUp}>Don't have an account? Click here</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -90,8 +96,8 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     width: '100%',
+    maxHeight: '90%',
     alignItems: 'center',
-    position: 'relative',
   },
   logoContainer: {
     position: 'absolute',
@@ -112,9 +118,13 @@ const styles = StyleSheet.create({
     height: 60,
   },
   titleContainer: {
-    marginTop: 60,
+    marginTop: 80,
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 30,
+  },
+  formContainer: {
+    width: '100%',
+    alignItems: 'stretch',  // Changed from 'center' to 'stretch'
   },
   welcomeText: {
     fontSize: 14,
@@ -139,11 +149,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     width: '100%',
   },
-  forgotPassword: {
-    color: '#FFFFFF',
-    textAlign: 'right',
+  forgotPasswordContainer: {
+    flexDirection: 'row',
+    alignSelf: 'flex-start',  // Changed from 'flex-end' to 'flex-start'
     marginBottom: 20,
-    alignSelf: 'flex-end',
+  },
+  forgotPasswordText: {
+    color: '#FFFFFF',
+  },
+  clickHereText: {
+    color: '#424242',
+    fontWeight: '500',
   },
   buttonWrapper: {
     alignSelf: 'flex-start',
@@ -197,9 +213,12 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-  signUp: {
+  signUpContainer: {
+    flexDirection: 'row',
+    alignSelf: 'flex-start',  // Changed from 'center' to 'flex-start'
+    justifyContent: 'flex-start',  // Added to ensure left alignment
+  },
+  signUpText: {
     color: '#FFFFFF',
-    textAlign: 'center',
-    marginTop: 10,
   },
 });

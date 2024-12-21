@@ -1,22 +1,35 @@
+import React, { useState } from 'react';
+import { View, Text, Image, ScrollView, StyleSheet, SafeAreaView, Pressable } from 'react-native';
 import Carousel from '@/components/Carousel';
 import BottomNavigation from '@/components/NavigationBar';
-import React, { useState } from 'react';
-import { View, Text, Image, ScrollView, StyleSheet, SafeAreaView } from 'react-native';
+import NotificationBell from '@/components/ui/icons/NotificationBell';
 
 export default function Dashboard() {
   const [currentTab, setCurrentTab] = useState('home');
+
+  const handleNotificationPress = () => {
+    // Add notification handling logic here
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.container}>
         <View style={styles.header}>
           <View style={styles.headerLeft}>
-            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.profilePic} />
+            <Image source={require('../../assets/images/Arjay in uniform 1.png')} style={styles.profilePic} />
             <Text style={styles.title}>Welcome back,{'\n'}Arjay Aranas</Text>
           </View>
-          <View style={styles.headerRight}>
-            <Text style={styles.notification}>🔔</Text>
-          </View>
+          <Pressable 
+            onPress={handleNotificationPress}
+            style={({ pressed }) => [
+              styles.headerRight,
+              pressed && styles.pressed
+            ]}
+          >
+            {({ pressed }) => (
+              <NotificationBell fill={pressed ? "#FC1B60" : "#000000"} />
+            )}
+          </Pressable>
         </View>
         <View style={styles.innerContainer}>
           <View style={styles.balance}>
@@ -66,7 +79,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: '#F4F4F4',
-    position: 'relative', // Add this to ensure the bottom navigation stays at the bottom
+    position: 'relative',
   },
   container: {
     flex: 1,
@@ -96,12 +109,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   headerRight: {
-    flexDirection: 'row',
+    padding: 8,
+    borderRadius: 20,
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  notification: {
-    fontSize: 24,
-    color: 'black',
+  pressed: {
+    opacity: 0.7,
   },
   innerContainer: {
     backgroundColor: '#EBEBEB',
@@ -184,6 +198,6 @@ const styles = StyleSheet.create({
     marginLeft: 16,
   },
   bottomPadding: {
-    height: 80, // Add padding at the bottom to prevent content from being hidden behind the navigation bar
+    height: 80,
   },
 });
